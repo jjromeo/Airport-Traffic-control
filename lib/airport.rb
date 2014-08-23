@@ -15,6 +15,7 @@ class Airport
 	end
 
 	def command_landing!(plane)
+	raise "Planes cannot land during stormy weather" if weather == "stormy"
 	raise "No more planes may land: the airport is full." if planes.count == capacity
 	plane.land!
 	planes << plane

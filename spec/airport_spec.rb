@@ -44,6 +44,10 @@ describe Airport do
 					expect{airport.launch!(plane)}.to raise_error "Planes cannot take off during stormy weather"
 				end
 
+				it "A plane cannot land when the weather is stormy" do 
+					expect{airport.command_landing!(plane)}.to raise_error "Planes cannot land during stormy weather"
+				end
+
 			end
 
 
