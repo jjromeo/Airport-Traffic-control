@@ -28,15 +28,14 @@ class Airport
 	end
 
 	def check_weather
-		@chance_of_storm = rand(6)
-		stormy_or_clear
-	end
-
-	def stormy_or_clear
-		case @chance_of_storm
-		when 1 then weather = "stormy"
-		else weather = "clear"
+		chance = rand(6)
+		case chance
+		when 1 
+			weather = "stormy"
+		else
+			weather = "clear"
 		end
+		# weather = %w(stormy clear).sample
 	end
 
 	def weather
