@@ -30,12 +30,21 @@ describe Airport do
 			expect(-> {airport.command_landing!(plane)}).to raise_error "No more planes may land: the airport is full."
 		end
 
-		context 'Weather conditions' do 
+		context 'Weather conditions:' do 
 			it "Can check whether the weather is stormy or clear" do 
-				expect(%w(stormy, clear)).to include airport.check_weather
+				expect(%w(stormy clear)).to include airport.check_weather
 			end
 
+			context 'Stormy weather:' do
+				before(:each) do 
+					airport.weather = "stormy"
+				end
 
+				it "A plane cannot take off when the weather is stormy" do
+					expect{airport.launch!(plane)}.to raise_error "Planes cannot take off during stormy weather"
+				end
+
+			end
 
 
 		end
