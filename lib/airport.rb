@@ -27,14 +27,15 @@ class Airport
 		planes.delete(plane)
 	end
 
-
 	def check_weather
-		# chance = rand(2)
-		# if chance == 1
-		# 	"stormy"
-		# else 
-		# 	"clear"
-		@weather = %w(stormy clear).sample
+		chance = rand(6)
+		case chance
+		when 1 
+			weather = "stormy"
+		else
+			weather = "clear"
+		end
+		# weather = %w(stormy clear).sample
 	end
 
 	def weather
