@@ -13,14 +13,23 @@ class Airport
 		@planes ||= []
 	end
 
-	def land!(plane)
+	def command_landing!(plane)
 	raise "No more planes may land: the airport is full." if planes.count == capacity
-	plane.flying = false
+	plane.land!
 	planes << plane
 	end
 
 	def launch!(plane)
-		plane.flying = true
+		plane.take_off!
 		planes.delete(plane)
+	end
+
+	def check_weather
+		# chance = rand(2)
+		# if chance == 1
+		# 	"stormy"
+		# else 
+		# 	"clear"
+		%w(stormy, clear).sample
 	end
 end
