@@ -4,7 +4,6 @@ describe Airport do
 	let(:airport) {Airport.new}
 	let(:landing_plane) {double :flying_plane, :flying= => true, land!: nil}
 	let(:plane) {double :plane, :flying= => true, land!: nil, take_off!: nil}
-	let(:chance) {double :chance, rand(2)}
 		
 		it "should initialize with a default capacity" do 
 			expect(airport.capacity).to eq(1)

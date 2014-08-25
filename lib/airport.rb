@@ -37,7 +37,6 @@ class Airport
 		else
 			@weather = "clear"
 		end
-		# weather = %w(stormy clear).sample
 	end
 
 	def weather
