@@ -5,8 +5,9 @@ describe Airport do
 	let(:landing_plane) {double :flying_plane, :flying= => true, land!: nil}
 	let(:plane) {double :plane, :flying= => true, land!: nil, take_off!: nil}
 	let(:chance) {double :chance, rand(2)}
+		
 		it "should initialize with a default capacity" do 
-			expect(airport.capacity).to eq(10)
+			expect(airport.capacity).to eq(1)
 		end
 
 	context 'Taking off and landing:' do
@@ -26,7 +27,7 @@ describe Airport do
 
 	context 'Traffic control:' do 
 		it "A plane cannot land if the airport is full." do 
-			10.times{airport.command_landing!(plane)}
+			airport.capacity.times{airport.command_landing!(plane)}
 			expect(-> {airport.command_landing!(plane)}).to raise_error "No more planes may land: the airport is full."
 		end
 

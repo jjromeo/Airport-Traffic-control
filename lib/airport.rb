@@ -1,6 +1,6 @@
 class Airport
 
-	DEFAULT_CAPACITY = 10
+	DEFAULT_CAPACITY = 1
 
 	attr_accessor :capacity
 	attr_writer :weather 
@@ -15,25 +15,27 @@ class Airport
 	end
 
 	def command_landing!(plane)
-	raise "Planes cannot land during stormy weather" if weather == "stormy"
 	raise "No more planes may land: the airport is full." if planes.count == capacity
+	raise "Planes cannot land during stormy weather" if weather == "stormy"
 	plane.land!
 	planes << plane
+	check_weather
 	end
 
 	def launch!(plane)
 		raise "Planes cannot take off during stormy weather" if weather == "stormy"
 		plane.take_off!
 		planes.delete(plane)
+		check_weather
 	end
 
 	def check_weather
-		chance = rand(6)
-		case chance
+		@chance = rand(6)
+		case @chance
 		when 1 
-			weather = "stormy"
+			@weather = "stormy"
 		else
-			weather = "clear"
+			@weather = "clear"
 		end
 		# weather = %w(stormy clear).sample
 	end

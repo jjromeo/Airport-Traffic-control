@@ -3,7 +3,7 @@ require 'plane'
 describe Plane do 
 
 	let(:plane) {Plane.new}
-	let(:airport) {double :airport, launch!: nil, land!: nil}
+	let(:airport) {double :airport, launch!: nil, land!: nil, check_weather: nil}
 
 	it 'Has flying status when created.' do
 		expect(plane).to be_flying
