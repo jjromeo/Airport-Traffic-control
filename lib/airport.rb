@@ -1,9 +1,8 @@
 class Airport
 
-	DEFAULT_CAPACITY = 1
+	DEFAULT_CAPACITY = 6
 
 	attr_accessor :capacity
-	attr_writer :weather 
 
 	def initialize(options = {})
 		self.capacity = options.fetch(:capacity, DEFAULT_CAPACITY)
@@ -30,16 +29,10 @@ class Airport
 	end
 
 	def check_weather
-		@chance = rand(6)
-		case @chance
-		when 1 
-			@weather = "stormy"
-		else
-			@weather = "clear"
-		end
+		rand(6) == 1 ? "stormy" : "clear"
 	end
 
 	def weather
-		@weather ||= "clear"
+		check_weather
 	end
 end

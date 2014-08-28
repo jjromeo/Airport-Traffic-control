@@ -4,21 +4,26 @@ describe Airport do
 	let(:airport) {Airport.new}
 	let(:landing_plane) {double :flying_plane, :flying= => true, land!: nil}
 	let(:plane) {double :plane, :flying= => true, land!: nil, take_off!: nil}
+
 		
 		it "should initialize with a default capacity" do 
-			expect(airport.capacity).to eq(1)
+			expect(airport.capacity).to eq(6)
+		end
+
+		it "should be empty on intialization" do 
+			expect(airport.planes).to eq []
 		end
 
 	context 'Taking off and landing:' do
 		it "A plane can land." do
-			expect(airport.planes).to eq []
+			allow(airport).to receive(:weather).and_return("clear")
 			airport.command_landing!(landing_plane)
 			expect(airport.planes).to eq [landing_plane]
 		end
 
 		it "A plane can take off." do 
+			allow(airport).to receive(:weather).and_return("clear")
 			airport.command_landing!(plane)
-			expect(airport.planes).to eq [plane]
 			airport.launch!(plane)
 			expect(airport.planes).to eq []
 		end
@@ -26,8 +31,10 @@ describe Airport do
 
 	context 'Traffic control:' do 
 		it "A plane cannot land if the airport is full." do 
+			allow(airport).to receive(:weather).and_return("clear")
+
 			airport.capacity.times{airport.command_landing!(plane)}
-			expect(-> {airport.command_landing!(plane)}).to raise_error "No more planes may land: the airport is full."
+			expect{airport.command_landing!(plane)}.to raise_error "No more planes may land: the airport is full."
 		end
 
 		context 'Weather conditions:' do 
@@ -37,7 +44,7 @@ describe Airport do
 
 			context 'Stormy weather:' do
 				before(:each) do 
-					airport.weather = "stormy"
+					allow(airport).to receive(:weather).and_return("stormy")
 				end
 
 				it "A plane cannot take off when the weather is stormy" do
